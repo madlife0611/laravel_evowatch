@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 //tao model: php artisan make:model Categories
 
 //doi tuong thao tac csdl

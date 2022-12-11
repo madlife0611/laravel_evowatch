@@ -98,6 +98,10 @@
                     <a href="{{ url('admin/products') }}">
                         <i class="fa fa-th"></i> <span>Danh sách sản phẩm</span>
                     </a>
+                </li><li>
+                    <a href="{{ url('admin/orders') }}">
+                        <i class="fa fa-th"></i> <span>Danh sách đơn hàng</span>
+                    </a>
                 </li>
                 <li>
                     <a href="{{ url('admin/news') }}">

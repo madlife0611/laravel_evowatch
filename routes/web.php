@@ -3,28 +3,32 @@
 use Illuminate\Support\Facades\Route;
 //khai bao cac class controller o day
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\cartController;
+
 
 //url: public/login
-Route::get('login',function(){
+Route::get('admin/login',function(){
     return view('backend.login');
 });
 //sau khi an nut submit login
-Route::post('login',function(){
+Route::post('admin/login',function(){
     $email = request("email");
     $password = request("password");
     //Auth::Attempt -> tra ve true neu email, password khop voi bang users
     if(Auth::Attempt(["email"=>$email,"password"=>$password]))
         return redirect(url('admin/users'));
     else
-        return redirect(url('login'));
+        return redirect(url('admin/login'));
 });
 //url: public/logout -> dang xuat
-Route::get("logout",function(){
+Route::get("admin/logout",function(){
     Auth::logout(); //Auth la doi tuong co san cua laravel
-    return redirect(url('login'));//di chuyen den mot url khac
+    return redirect(url('admin/login'));//di chuyen den mot url khac
 });
 Route::group(["prefix"=>"admin","middleware"=>"checklogin"],function(){
     //---
@@ -88,18 +92,77 @@ Route::group(["prefix"=>"admin","middleware"=>"checklogin"],function(){
     //delete
     Route::get("products/delete/{id}",[ProductsController::class,"delete"]);
     //---
+    //---
+    //chuc nang products - CRUD
+    //read
+    Route::get("orders",[OrdersController::class,"read"]);
+    //delivery
+    Route::get("orders/delivery/{order_id}",[OrdersController::class,"delivery"]);
+    //detail
+    Route::get("orders/detail/{order_id}",[OrdersController::class,"detail"]);
+    
+    //---
+    
 });
 
 //----------------------frontend-----------------------
+
 //trang chu
 Route::get('/', function () {
     return view('frontend.home');
 });
+//login
+Route::get('login', function () {
+    return view('frontend.login');
+});
+// //sau khi an nut submit login
+// Route::post('login',function(){
+//     $email = request("email");
+//     $password = request("password");
+//     //Auth::Attempt -> tra ve true neu email, password khop voi bang users
+//     if(Auth::Attempt(["email"=>$email,"password"=>$password]))
+//         return redirect(url(''));
+//     else
+//         return redirect(url('login'));
+// });
+Route::post('/login-customer',[CustomersController::class, 'login_customer'])->name('login-customer');
+Route::get('logout',[CustomersController::class, 'logout_checkout'])->name('logout');
+Route::get('login',[CustomersController::class, 'return_login'])->name('login');
+//url: public/logout -> dang xuat
+
+//regiter
+Route::get('register', function () {
+    return view('frontend.register');
+});
+//chuc nang users - CRUD
+    //create - GET
+    Route::get("register/create",[CustomersController::class,"create"]);
+    //create - POST
+    Route::post("register/create",[CustomersController::class,"createPost"]);
+    //---
 //trang danh muc
-Route::get('news/category/{category_id}', function ($category_id) {
+Route::get('category/{category_id}', function ($category_id) {
     return view('frontend.category',["category_id"=>$category_id]);
 });
 //trang chi tiet
-Route::get('news/detail/{id}', function ($id) {
-    return view('frontend.productdetail',["id"=>$id]);
+Route::get('detail/{id}', function ($id) {
+    return view('frontend.detail',["id"=>$id]);
 });
+Route::get('news', function () {
+    return view('frontend.news');
+});
+Route::get('news/detail/{id}', function ($id) {
+    return view('frontend.newsdetail',["id"=>$id]);
+});
+// Route::get('cart', function () {
+//     return view('frontend.cart');
+// });
+
+// cart
+Route::post('/cart', [cartController::class, 'save'])->name('cart');
+Route::get('/cart', [cartController::class, 'showCart'])->name('cart');
+Route::get('/delete_cart/{rowId}', [cartController::class, 'delete'])->name('delete_cart');
+Route::post('/update_cart', [cartController::class, 'update'])->name('update_cart');
+Route::post('/order-place',[cartController::class, 'order_place'])->name('order-place');
+
+

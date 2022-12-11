@@ -13,7 +13,7 @@
                 <tr>
                     <th style="width:200px;">Image</th>
                     <th>Name</th>
-                    
+                    <th>Description</th>
                     <th style="width:100px;"></th>
                 </tr>
                 @foreach($data as $rows)
@@ -24,7 +24,7 @@
                         @endif
                     </td>
                     <td>{{ $rows->name }}</td>
-                    
+                    <td>{{ $rows->description }}</td>
                     <td style="text-align:center;">
                         <a href="{{ url('admin/categories/update/'.$rows->id) }}">Edit</a>&nbsp;
                         <a href="{{ url('admin/categories/delete/'.$rows->id) }}" onclick="return window.confirm('Are you sure?');">Delete</a>

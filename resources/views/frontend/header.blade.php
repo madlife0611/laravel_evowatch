@@ -42,35 +42,38 @@
             </div>
 
             <div class="header__user">
-
+              
               <div class="header__user-info c-0">
                 <img src="{{ asset('EvoWatch/assets/img/user_avatar.jpg') }}" alt="avatar" class="header__user-avatar">
+                <?php $email = Session::get('email'); 
+                  if($email != null){
+                ?>
                 <span class="header__user-item">
-                  <span class="header__user-lable">Tài khoản</span>
+                  
+                  <span class="header__user-lable"><?php echo $email; ?></span>
+                  <a class="header__user-acount-link" href="{{ url('logout')}}">Đăng xuất</a>
+                </span>
+                  <?php }else{ ?>
                   <span class="header__user-acount-label">
-                    <a class="header__user-acount-link" href="login.html">Đăng nhập/Đăng ký</a>
+                    <a class="header__user-acount-link" href="{{ url('login')}}">Đăng nhập/Đăng ký</a>
                     <i class="header__user-icon fa-solid fa-caret-down"></i>
                   </span>
-                </span>
+                <?php } ?>
+                 
+                
 
-                <ul class="header__user-info-menu">
-                  <li class="header__user-info-item">
-                    <a href="" class="header__user-info--link">
-                      Thoát tài khoản
-                    </a>
-                  </li>
-                </ul>
+                
 
               </div>
 
               <div class="header__user-cart">
-                <a href="Cart.html" class="header__user-cart--link">
+                <a href="{{ url('cart') }}" class="header__user-cart--link">
                   <div class="header__usert-cart-item">
                     <div class="header__user-cart-wrapper">
                       <img src="{{ asset('EvoWatch/assets/img/icon__cart.png') }}" alt="icon__cart" class="header__user-cart-img">
-                      <span class="header__user-cart-quantity">1</span>
+                      <!-- <span class="header__user-cart-quantity">1</span> -->
                     </div>
-                    <a href="cart.html" class="header__user-cart-text">Giỏ hàng</a>
+                    <a href="{{ url('cart') }}" class="header__user-cart-text">Giỏ hàng</a>
                   </div>
 
                 </a>
@@ -86,22 +89,24 @@
               <div class="header-nav c-0">
                 <ul class="header-nav-menu d-flex-v">
                   <li class="header-nav-item">
-                    <a href="index.html" class="header-nav-link">Trang chủ</a>
+                    <a href="{{ url('') }}" class="header-nav-link">Trang chủ</a>
                   </li>
                   <li class="header-nav-item">
                     <a href="" class="header-nav-link">Giới thiệu</a>
                   </li>
+                  <?php 
+                    $categories = DB::select("select * from category order by id asc");
+                 ?>
+
+                 @foreach($categories as $rows)
+
                   <li class="header-nav-item">
-                    <a href="category.html" class="header-nav-link">Nam</a>
+                    <a href="{{ url('category/'.$rows->id) }}" class="header-nav-link">{{ $rows->name }}</a>
                   </li>
+                  @endforeach
+
                   <li class="header-nav-item">
-                    <a href="category.html" class="header-nav-link">Nữ</a>
-                  </li>
-                  <li class="header-nav-item">
-                    <a href="category.html" class="header-nav-link">Phụ kiện</a>
-                  </li>
-                  <li class="header-nav-item">
-                    <a href="blogs.html" class="header-nav-link">Tin tức</a>
+                    <a href="{{ url('news') }}" class="header-nav-link">Tin tức</a>
                   </li>
                   <li class="header-nav-item">
                     <a href="about.html" class="header-nav-link">Liên hệ</a>

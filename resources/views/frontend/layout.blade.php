@@ -20,17 +20,9 @@
   <body>
     <div class="app">
       @include("frontend.header")
+   
+		  @yield("do-du-lieu") 
 
-      <!-- Begin barner  -->
-
-      <div class="slider"></div>
-
-      <!-- End barner  -->
-
-      <main class="content">
-        
-		@yield("do-du-lieu") 
-      </main>
 
       <footer class="footer">
         <div class="grid wide">

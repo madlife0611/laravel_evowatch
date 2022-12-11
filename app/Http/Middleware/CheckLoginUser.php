@@ -7,7 +7,7 @@ use Closure;
 //su dung doi tuong Auth de kiem tra dang nhap
 use Auth;
 
-class CheckLogin
+class CheckLoginUser
 {
     /**
      * Handle an incoming request.
@@ -22,7 +22,7 @@ class CheckLogin
         //url('login') -> tao url
         //redirect -> di chuyen den mot url
         if(Auth::check() == false)
-            return redirect(url('admin/login'));
+            return redirect(url('login'));
         return $next($request);
     }
 }
