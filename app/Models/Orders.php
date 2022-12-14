@@ -17,18 +17,19 @@ class Orders extends Model
         $data = DB::table("orders")->orderBy("order_id","desc")->paginate(20);
         return $data;
     }
-    // public function modelGetCustomer($customer_id){
-    // 	$data = DB::table("customer")->where("customer_id","=",$customer_id)->first();
-    //     return $data;
-    // }
-    public function modelOrderDetails($order_id){
-    	$data = DB::table("orderdetails")->where("order_id","=",$order_id);
+    public function modelGetCustomer($customer_id){
+    	$data = DB::table("customer")->where("customer_id","=",$customer_id)->first();
         return $data;
     }
-    // public function modelGetProduct($product_id){
-    // 	$data = DB::table("product")->where("id","=",$product_id);
-    //     return $data;
-    // }
+    public function modelGetProduct($product_id){
+        $data = DB::table("product")->where("id","=",$product_id);
+        return $data;
+    }
+    public function modelOrderDetails($order_id){
+    	$record = DB::table("orderdetails")->where("order_id","=",$order_id);
+        return $record;
+    }
+    
     //giao hang
 	public function modelDelivery($order_id){
 		$status = "Đã giao hàng";

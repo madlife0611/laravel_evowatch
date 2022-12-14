@@ -32,9 +32,9 @@
                     </td>
                     <td style="text-align:center;">
                         <?php if($rows->status == "Đang chờ xử lý"){ ?>
-                        <a href="{{ url('admin/orders/delivery/'.$rows->order_id) }}" class="label label-info">Giao hàng</a>
-                        &nbsp;&nbsp;
-                    <?php } ?>
+                            <a href="{{ url('admin/orders/delivery/'.$rows->order_id) }}" class="label label-info">Giao hàng</a>
+                            &nbsp;&nbsp;
+                        <?php } ?>
                         
                         <a href="{{ url('admin/orders/detail/'.$rows->order_id) }}" class="label label-success">Chi tiết</a>
                     </td>
