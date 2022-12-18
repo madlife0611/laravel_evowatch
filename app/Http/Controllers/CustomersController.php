@@ -36,12 +36,11 @@ class CustomersController extends Controller
         $countEmail = DB::Table("customer")->where("email","=",$email)->Count();
         if($countEmail == 0){
             //update name
-            DB::Table("customer")->insert(["name"=>$name,"email"=>$email,"password"=>$password,"address"=>$address,"phone_number"=>$phone_number]);
+            $customer_id = DB::table('customer')->insertGetId(['name'=>$name, 'email'=>$email, 'password'=>$password, 'phone_number'=>$phone_number,'address'=>$address]);
             //di chuyen den mot url khac
-            return redirect(url(""));
+             return Redirect::to('login');
         }else
-            return redirect(url("register/create?notify=emailExists"));
-        
+            return redirect(url("register?notify=emailExists"));       
     }
 
     public function login_customer(Request $req){

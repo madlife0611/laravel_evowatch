@@ -3,11 +3,10 @@
 <link rel="stylesheet" href="{{ asset('EvoWatch/assets/css/login.css') }}" />
 
 <main class="loginForm">
-	@if(Request::get("notify") == "emailExists")
-    <div class="alert alert-danger">Email đã tồn tại, mời chọn email khác</div>
-    @endif
+	   
         <div class="grid wide row">
-          <form method="post" action="{{ $action }}">
+
+          <form method="post" action="{{ URL::to('/add-customer') }}">
           	<!-- trong laravel, muon bat duoc du lieu thi co tag csrf() -->
             <!-- viet tuong minh ham csrf(): <input type='hidden' name='csrf_token' value='...' -->
           	@csrf
@@ -38,6 +37,9 @@
             <div class="userInforRow btn-wrapper d-flex-h">
               <input type="submit" value="Đăng ký" class="d-flex-v btn form-input btn-login">
             </div>
+            @if(Request::get("notify") == "emailExists")
+          <h3 style="color: red;">Email đã tồn tại, mời chọn email khác</h3>
+          @endif
             <p class="loginForm-check d-block text-center">
               Bạn đã có tài khoản? Đăng nhập
               <a href="{{ url('login') }}" class="loginForm-link link-color">tại đây</a>

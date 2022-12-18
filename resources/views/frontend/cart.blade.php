@@ -66,8 +66,8 @@
 
               </div>
 
-              <?php $email = Session::get('email');
-              if($email != null){
+              <?php $customer_id = Session::get('customer_id');
+              if($customer_id != null){
                ?>
                <div class="content__cart-user-info">
                 <div class="content__cart-user-info-title">

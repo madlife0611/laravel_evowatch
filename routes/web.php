@@ -128,18 +128,20 @@ Route::get('login', function () {
 Route::post('/login-customer',[CustomersController::class, 'login_customer'])->name('login-customer');
 Route::get('logout',[CustomersController::class, 'logout_checkout'])->name('logout');
 Route::get('login',[CustomersController::class, 'return_login'])->name('login');
+Route::get('register',[CustomersController::class, 'create'])->name('register');
+Route::post('/add-customer',[CustomersController::class, 'createPost'])->name('add-customer');
 //url: public/logout -> dang xuat
 
 //regiter
-Route::get('register', function () {
-    return view('frontend.register');
-});
-//chuc nang users - CRUD
-    //create - GET
-    Route::get("register/create",[CustomersController::class,"create"]);
-    //create - POST
-    Route::post("register/create",[CustomersController::class,"createPost"]);
-    //---
+// Route::get('register', function () {
+//     return view('frontend.register');
+// });
+// //chuc nang users - CRUD
+//     //create - GET
+//     Route::get("register/create",[CustomersController::class,"create"]);
+//     //create - POST
+//     Route::post("register/create",[CustomersController::class,"createPost"]);
+//     //---
 //trang danh muc
 Route::get('category/{category_id}', function ($category_id) {
     return view('frontend.category',["category_id"=>$category_id]);
