@@ -93,7 +93,7 @@ Route::group(["prefix"=>"admin","middleware"=>"checklogin"],function(){
     Route::get("products/delete/{id}",[ProductsController::class,"delete"]);
     //---
     //---
-    //chuc nang products - CRUD
+    //chuc nang orders - CRUD
     //read
     Route::get("orders",[OrdersController::class,"read"]);
     //delivery
